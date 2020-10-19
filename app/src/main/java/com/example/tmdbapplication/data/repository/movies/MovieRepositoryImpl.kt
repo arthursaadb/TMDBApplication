@@ -1,5 +1,8 @@
 package com.example.tmdbapplication.data.repository.movies
 
+import android.util.Log
+import com.example.tmdbapplication.data.mapper.movie.DBMovieMapper
+import com.example.tmdbapplication.data.mapper.movie.NetworkMovieMapper
 import com.example.tmdbapplication.data.model.movie.MovieModel
 import com.example.tmdbapplication.data.model.movie.db.DBMovie
 import com.example.tmdbapplication.data.repository.movies.datasource.cache.MovieCacheDataSource
@@ -11,21 +14,38 @@ import java.lang.Exception
 class MovieRepositoryImpl(
     private val movieRemoteDataSource: MovieRemoteDataSource,
     private val movieLocalDataSource: MovieLocalDataSource,
-    private val movieCacheDataSource: MovieCacheDataSource
+    private val movieCacheDataSource: MovieCacheDataSource,
+    private val networkMovieMapper: NetworkMovieMapper,
+    private val dbMovieMapper: DBMovieMapper
 ) : MovieRepository {
-    override suspend fun getMovies(): List<MovieModel>? = getMoviesFromCache()
+    override suspend fun getMovies(): List<MovieModel> = getMoviesFromCache()
 
-    override suspend fun updateMovies(): List<MovieModel>? {
-        //Download movies from api, clear db, save to db and cache, return new list.
-    }
+    override suspend fun updateMovies(): List<MovieModel> {
+        var movies: List<MovieModel> = listOf()
 
-    suspend fun getMoviesFromApi(): List<MovieModel> {
         try {
-            val response = movieRemoteDataSource.getMoviesFromNetwork()
-            val body = response.body()
+            movies = getMoviesFromApi()
+            movieLocalDataSource.saveMoviesToDB(dbMovieMapper.unmapList(movies))
+            movieCacheDataSource.saveMoviesToCache(movies)
         } catch (e: Exception) {
 
         }
+
+        return movies
+    }
+
+    suspend fun getMoviesFromApi(): List<MovieModel> {
+        var movies: List<MovieModel> = listOf()
+
+        try {
+            val response = movieRemoteDataSource.getMoviesFromNetwork()
+            val body = response.body()
+            movies = networkMovieMapper.mapList(body?.results)
+        } catch (e: Exception) {
+            Log.e("exception", e.message.toString())
+        }
+
+        return movies
     }
 
     suspend fun getMoviesFromDB(): List<MovieModel> {
@@ -44,7 +64,5 @@ class MovieRepositoryImpl(
         }
     }
 
-    suspend fun getMoviesFromCache(): List<MovieModel> {
-        //Try to catch movie from cache, if is empty, try to catch movies from db.
-    }
+    suspend fun getMoviesFromCache(): List<MovieModel> = movieCacheDataSource.getMoviesFromCache()
 }

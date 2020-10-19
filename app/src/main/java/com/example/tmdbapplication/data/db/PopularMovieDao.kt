@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.tmdbapplication.data.model.movie.db.DBMovie
-import com.example.tmdbapplication.data.model.movie.response.PopularMovieResponse
 
 @Dao
 interface MovieDao {

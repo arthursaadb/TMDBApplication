@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "movie_table")
 data class DBMovie(
-    @PrimaryKey val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val overview: String = "",
     val posterPath: String = "",
     val releaseDate: String = "",
