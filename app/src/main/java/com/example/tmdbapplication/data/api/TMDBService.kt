@@ -7,7 +7,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 
 interface TMDBService {
-    @GET("/movie/popular")
+    @GET("3/movie/popular")
     suspend fun getPopularMovies(): Response<NetworkPopularMovie>
 
     @GET("/person/popular")

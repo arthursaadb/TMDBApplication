@@ -26,7 +26,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField 'String', 'APIKEY', "\"8be89195a64206c889833492c39467e9 \""
+        it.buildConfigField 'String', 'APIKEY', "\"8be89195a64206c889833492c39467e9\""
     }
 
     dataBinding {
@@ -36,6 +36,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
     }
 }
 
@@ -73,18 +77,28 @@ dependencies {
 
     // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_jetpack_version"
+    kapt "androidx.hilt:hilt-compiler:$hilt_jetpack_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     // Okhttp
     implementation "com.squareup.okhttp3:logging-interceptor:$logging_version"
 
     // Picasso
     implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    //KTX
+    implementation "androidx.core:core-ktx:1.3.2"
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+    implementation "androidx.room:room-ktx:2.2.5"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 }
 
 kapt {

@@ -1,20 +1,22 @@
 package com.example.tmdbapplication.data.model.movie.network
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class NetworkMovie(
-    @Json(name = "id") var id: Int? = null,
-    @Json(name = "adult") var adult: Boolean? = null,
-    @Json(name = "backdrop_path") var backdropPath: String? = null,
-    @Json(name = "genre_ids") var genreIds: List<Int>? = null,
-    @Json(name = "original_language") var originalLanguage: String? = null,
-    @Json(name = "original_title") var originalTitle: String? = null,
-    @Json(name = "overview") var overview: String? = null,
-    @Json(name = "popularity") var popularity: Double? = null,
-    @Json(name = "poster_path") var posterPath: String? = null,
-    @Json(name = "release_date") var releaseDate: String? = null,
-    @Json(name = "title") var title: String? = null,
-    @Json(name = "video") var video: Boolean? = null,
-    @Json(name = "vote_average") var voteAverage: Double? = null,
-    @Json(name = "vote_count") var voteCount: Int? = null
+    @Json(name = "poster_path") val posterPath: String? = null,
+    @Json(name = "adult") val adult: Boolean = false,
+    @Json(name = "overview") val overview: String? = null,
+    @Json(name = "release_date") val releaseDate: String? = null,
+    @Json(name = "genre_ids") val genreIds: List<Int>? = null,
+    @Json(name = "id") val id: Int? = null,
+    @Json(name = "original_title") val originalTitle: String? = null,
+    @Json(name = "original_language") val originalLanguage: String? = null,
+    @Json(name = "title") val title: String? = null,
+    @Json(name = "backdrop_path") val backdropPath: String? = null,
+    @Json(name = "popularity") val popularity: Double? = null,
+    @Json(name = "vote_count") val voteCount: Int? = null,
+    @Json(name = "video") val video: Boolean? = null,
+    @Json(name = "vote_average") val voteAverage: Double? = null
 )

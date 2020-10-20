@@ -1,3 +1,5 @@
+package com.example.tmdbapplication.presentation
+
 import android.content.Intent
 import com.example.tmdbapplication.R
 

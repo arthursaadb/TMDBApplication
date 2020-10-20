@@ -6,8 +6,9 @@ import com.example.tmdbapplication.data.repository.movies.datasource.local.Movie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MovieLocalDataSourceImpl(private val movieDao: MovieDao) :
+class MovieLocalDataSourceImpl @Inject constructor(private val movieDao: MovieDao) :
     MovieLocalDataSource {
     override suspend fun getMoviesFromDB(): List<DBMovie> =
         movieDao.getMovies()
