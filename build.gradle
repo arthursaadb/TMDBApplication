@@ -12,6 +12,7 @@ buildscript {
         moshi_version = "1.11.0"
         logging_version = "4.9.0"
         picasso_version = "2.71828"
+        nav_version = "2.3.1"
     }
 
     repositories {

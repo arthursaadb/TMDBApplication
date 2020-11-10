@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.tmdbapplication.databinding.ActivityMainBinding
-import com.example.tmdbapplication.presentation.movie.MovieActivity
+import com.example.tmdbapplication.presentation.movie.MovieFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.btMovies.setOnClickListener {
-            val intent = Intent(this, MovieActivity::class.java)
+            val intent = Intent(this, MovieFragment::class.java)
             startActivity(intent)
         }
     }
