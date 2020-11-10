@@ -39,6 +39,11 @@ class MovieAdapter(private val movieList: List<MovieModel>) :
             setTitle(movie.title)
             setImage(movie.movieUrl)
             setDescription(movie.overview)
+            setVoteAverage(movie.voteAverage)
+        }
+
+        private fun setVoteAverage(voteAverage: Double) {
+            binding.voteAverageTextView.text = voteAverage.toString()
         }
 
         private fun setDescription(overview: String) {

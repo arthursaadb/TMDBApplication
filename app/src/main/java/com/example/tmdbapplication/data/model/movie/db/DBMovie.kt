@@ -9,5 +9,6 @@ data class DBMovie(
     val overview: String = "",
     val posterPath: String = "",
     val releaseDate: String = "",
-    val title: String = ""
+    val title: String = "",
+    val voteAverage: Double = 0.0
 )

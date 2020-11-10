@@ -1,22 +1,21 @@
 package com.example.tmdbapplication.presentation.movie
 
+import android.graphics.Movie
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.*
+import com.example.tmdbapplication.data.model.movie.MovieModel
 import com.example.tmdbapplication.domain.movies.usecases.GetMoviesUseCase
 import com.example.tmdbapplication.domain.movies.usecases.UpdateMovieUseCase
+import kotlinx.coroutines.launch
 
 class MovieViewModel @ViewModelInject constructor(
     private val getMovieUseCase: GetMoviesUseCase,
     private val updateMovieUseCase: UpdateMovieUseCase
 ) : ViewModel() {
+    private val _movieList = MutableLiveData<List<MovieModel>>()
+    val movieList: LiveData<List<MovieModel>> = _movieList
 
-    fun getMovies() = liveData {
-        emit(getMovieUseCase.execute())
-    }
-
-    fun updateMovieList() = liveData {
-        emit(updateMovieUseCase.execute())
+    fun getMovies() = viewModelScope.launch {
+        _movieList.value = getMovieUseCase.execute()
     }
 }

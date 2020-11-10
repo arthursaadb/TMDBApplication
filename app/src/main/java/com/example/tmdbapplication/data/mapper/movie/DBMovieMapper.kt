@@ -11,7 +11,8 @@ class DBMovieMapper @Inject constructor() : Mapper<DBMovie, MovieModel> {
             overview = input.overview,
             posterPath = input.posterPath,
             releaseDate = input.releaseDate,
-            title = input.title
+            title = input.title,
+            voteAverage = input.voteAverage
         )
 
     override fun unmap(input: MovieModel): DBMovie =
@@ -19,7 +20,8 @@ class DBMovieMapper @Inject constructor() : Mapper<DBMovie, MovieModel> {
             overview = input.overview,
             posterPath = input.posterPath,
             releaseDate = input.releaseDate,
-            title = input.title
+            title = input.title,
+            voteAverage = input.voteAverage
         )
 
     override fun mapList(input: List<DBMovie>?): List<MovieModel> =

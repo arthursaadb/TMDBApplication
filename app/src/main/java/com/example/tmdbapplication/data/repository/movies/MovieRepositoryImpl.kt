@@ -27,6 +27,22 @@ class MovieRepositoryImpl @Inject constructor(
         return newListOfMovies
     }
 
+    override suspend fun loadSortedMovies(isAcending: Boolean): List<MovieModel> {
+        lateinit var movieList: List<MovieModel>
+
+        try {
+            movieList = if (isAcending) {
+                dbMovieMapper.mapList(movieLocalDataSource.getMoviesByVoteAverageAscending())
+            } else {
+                dbMovieMapper.mapList(movieLocalDataSource.getMoviesByVoteAverageDescending())
+            }
+        } catch (e: Exception) {
+            Log.i("MyTag", e.message.toString())
+        }
+
+        return movieList
+    }
+
     private suspend fun getMoviesFromAPI(): List<MovieModel> {
         lateinit var movieList: List<MovieModel>
 

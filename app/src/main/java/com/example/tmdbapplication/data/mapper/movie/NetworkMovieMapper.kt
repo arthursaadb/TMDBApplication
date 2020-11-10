@@ -11,7 +11,8 @@ class NetworkMovieMapper @Inject constructor() : Mapper<NetworkMovie, MovieModel
             overview = input.overview ?: "",
             posterPath = input.posterPath ?: "",
             releaseDate = input.releaseDate ?: "",
-            title = input.title ?: ""
+            title = input.title ?: "",
+            voteAverage = input.voteAverage ?: 0.0
         )
 
     override fun unmap(input: MovieModel): NetworkMovie =
@@ -19,7 +20,8 @@ class NetworkMovieMapper @Inject constructor() : Mapper<NetworkMovie, MovieModel
             overview = input.overview,
             posterPath = input.posterPath,
             releaseDate = input.releaseDate,
-            title = input.title
+            title = input.title,
+            voteAverage = input.voteAverage
         )
 
     override fun mapList(input: List<NetworkMovie>?): List<MovieModel> =

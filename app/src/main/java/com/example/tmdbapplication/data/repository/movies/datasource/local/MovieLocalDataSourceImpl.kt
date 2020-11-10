@@ -2,10 +2,6 @@ package com.example.tmdbapplication.data.repository.movies.datasource.local
 
 import com.example.tmdbapplication.data.db.MovieDao
 import com.example.tmdbapplication.data.model.movie.db.DBMovie
-import com.example.tmdbapplication.data.repository.movies.datasource.local.MovieLocalDataSource
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MovieLocalDataSourceImpl @Inject constructor(private val movieDao: MovieDao) :
@@ -14,14 +10,16 @@ class MovieLocalDataSourceImpl @Inject constructor(private val movieDao: MovieDa
         movieDao.getMovies()
 
     override suspend fun saveMoviesToDB(movies: List<DBMovie>) {
-        CoroutineScope(Dispatchers.IO).launch {
-            movieDao.saveMovies(movies)
-        }
+        movieDao.saveMovies(movies)
     }
 
+    override suspend fun getMoviesByVoteAverageDescending(): List<DBMovie> =
+        movieDao.loadMoviesByVoteAverageDescending()
+
+    override suspend fun getMoviesByVoteAverageAscending(): List<DBMovie> =
+        movieDao.loadMoviesByVoteAverageAscending()
+
     override suspend fun clearAllMovies() {
-        CoroutineScope(Dispatchers.IO).launch {
-            movieDao.deleteAllMovies()
-        }
+        movieDao.deleteAllMovies()
     }
 }

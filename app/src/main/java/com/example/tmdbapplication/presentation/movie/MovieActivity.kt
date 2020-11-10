@@ -18,11 +18,12 @@ class MovieActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie)
 
-        getPopularMovies()
+        observeMovies()
+        viewModel.getMovies()
     }
 
-    private fun getPopularMovies() {
-        viewModel.getMovies().observe(this, Observer {
+    private fun observeMovies() {
+        viewModel.movieList.observe(this, Observer {
             binding.rvMovies.adapter = MovieAdapter(it)
         })
     }

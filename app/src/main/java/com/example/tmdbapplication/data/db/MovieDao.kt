@@ -16,4 +16,10 @@ interface MovieDao {
 
     @Query("SELECT * FROM movie_table")
     suspend fun getMovies(): List<DBMovie>
+
+    @Query("SELECT * FROM movie_table ORDER BY voteAverage ASC")
+    suspend fun loadMoviesByVoteAverageAscending(): List<DBMovie>
+
+    @Query("SELECT * FROM movie_table ORDER BY voteAverage DESC")
+    suspend fun loadMoviesByVoteAverageDescending(): List<DBMovie>
 }

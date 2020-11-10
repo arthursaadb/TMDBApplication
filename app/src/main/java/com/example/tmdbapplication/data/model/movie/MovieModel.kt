@@ -4,7 +4,8 @@ data class MovieModel(
     val overview: String,
     val posterPath: String,
     val releaseDate: String,
-    val title: String
+    val title: String,
+    val voteAverage: Double
 ) {
     val movieUrl
         get() = "https://image.tmdb.org/t/p/w500/$posterPath"
