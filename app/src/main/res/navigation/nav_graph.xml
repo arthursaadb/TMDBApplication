@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/gatewayFragment">
 
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.example.tmdbapplication.presentation.movie.MovieFragment"
+        android:label="MovieFragment" />
+
+    <fragment
+        android:id="@+id/gatewayFragment"
+        android:name="com.example.tmdbapplication.presentation.gateway.GatewayFragment"
+        android:label="GatewayFragment" >
+        <action
+            android:id="@+id/action_gatewayFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
 </navigation>
