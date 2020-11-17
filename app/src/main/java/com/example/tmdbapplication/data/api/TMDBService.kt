@@ -5,10 +5,14 @@ import com.example.tmdbapplication.data.model.people.response.PopularPeopleRespo
 import com.example.tmdbapplication.data.model.tvshow.response.PopularTvShowResponse
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface TMDBService {
     @GET("3/movie/popular")
     suspend fun getPopularMovies(): Response<NetworkPopularMovie>
+
+    @GET("3/movie/popular")
+    suspend fun getPopularMoviesPaging(@Query("page") page: Int): Response<NetworkPopularMovie>
 
     @GET("/person/popular")
     suspend fun getPopularPeople(): Response<PopularPeopleResponse>
